@@ -38,5 +38,5 @@ A real-time, automated trading dashboard built with Python, Streamlit, and Plotl
 
 📌 MVP Link
 
-🔗 [Live Demo](https://your-streamlit-url.streamlit.app) *(Replace with actual URL after deployment)*
+🔗 [Live Demo](https://alphacore-quantai.streamlit.app/) 
 
