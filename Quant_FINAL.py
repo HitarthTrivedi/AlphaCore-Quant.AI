@@ -163,7 +163,7 @@ def inject_popup_js():
 @st.cache_data(ttl=10)
 def fetch_current_bhaav(symbol):
     try:
-        exchange = ccxt.binance()
+        exchange = ccxt.kucoin()
         ticker = exchange.fetch_ticker(symbol)
         current_bhaav = ticker['last']
         return current_bhaav
@@ -197,7 +197,7 @@ def fetch_available_symbols(exchange_id):
 
 # Fetch Live Market Data
 @st.cache_data(ttl=5)  # 5 seconds for auto-update
-def fetch_live_data(symbol, exchange_id='binance', timeframe='1h'):
+def fetch_live_data(symbol, exchange_id='kucoin', timeframe='1h'):
     try:
         # Initialize exchange
         exchange_class = getattr(ccxt, exchange_id)
@@ -449,7 +449,7 @@ class PaperTrading:
         return True, f"Sell order executed. Profit/Loss: ${profit_loss:.2f}"
 
 class AutoTrader:
-    def __init__(self, paper_trading, symbol="BTC/USDT", exchange_id="binance",
+    def __init__(self, paper_trading, symbol="BTC/USDT", exchange_id="kucoin",
                  capital_limit=None, time_limit=None, trade_interval=15,
                  position_size=0.001, stop_loss_pct=5, take_profit_pct=10):
         self.paper_trading = paper_trading
@@ -716,7 +716,7 @@ class AutoTrader:
             self.status_message = f"Decision error: {str(e)}"
 
 class Graph:
-    def __init__(self, symbol, exchange_id='binance'):
+    def __init__(self, symbol, exchange_id='kucoin'):
         self.symbol = symbol
         self.exchange_id = exchange_id
         self.df = fetch_live_data(self.symbol, self.exchange_id)
@@ -876,7 +876,7 @@ def create_auto_trade_ui():
                                   key="autotrader_symbol")
 
             exchange = st.selectbox("Exchange", EXCHANGES,
-                                   index=EXCHANGES.index("binance"),
+                                   index=EXCHANGES.index("kucoin"),
                                    key="autotrader_exchange")
 
             position_size = st.number_input("Position Size",
